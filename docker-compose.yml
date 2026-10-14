@@ -1,0 +1,16 @@
+services:
+  backend:
+    image: jeevansathish/dockerprac-backend:latest
+    build:
+      context: ./backend
+    ports:
+      - "8000:8000"
+
+  frontend:
+    image: jeevansathish/dockerprac-frontend:latest
+    build:
+      context: ./frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
