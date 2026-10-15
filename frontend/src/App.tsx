@@ -1,16 +1,21 @@
-import ClickCounter from "./ClickCounter";
-import HoverCount from "./HoverCount";
+import useCustomApiCall from "./useCustomApiCall";
 
-import withWrapper from "./withWrapper";
-
-const EnhancedComponent = withWrapper(ClickCounter);
-const HoverCompnet = withWrapper(HoverCount);
 const App = () => {
+  const { data, callApi, error } = useCustomApiCall();
+
   return (
-    <>
-      <EnhancedComponent />
-      <HoverCompnet />
-    </>
+    <div>
+      <button onClick={() => callApi("users")}>Call API</button>
+
+      {data.map((ele, index) => (
+        <div key={index}>
+          <p>{JSON.stringify(ele)}</p>
+          <br />
+        </div>
+      ))}
+
+      {error && <p>{error}</p>}
+    </div>
   );
 };
 
